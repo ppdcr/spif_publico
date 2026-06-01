@@ -1,0 +1,83 @@
+services:
+  db:
+    image: postgres:15
+    container_name: postgres-db
+    environment:
+      POSTGRES_DB: spif
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq-service
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  # --- Runners para o Judge ---
+  python-runner:
+    image: python:3.11-slim
+    command: echo "Imagem pronta"
+    restart: "no"
+
+  cpp-runner:
+    image: gcc:latest
+    command: echo "Imagem pronta"
+    restart: "no"
+
+  java-runner:
+    image: eclipse-temurin:17-jdk-jammy
+    command: echo "Imagem pronta"
+    restart: "no"
+
+  javascript-runner:
+    image: node:18-slim
+    command: echo "Imagem pronta"
+    restart: "no"
+
+  # --- Backend (Spring Boot) ---
+  app:
+    build: 
+      context: ./backend  # Aponta para a subpasta do Java
+    container_name: backend-app
+    depends_on:
+      - db
+      - rabbitmq
+      - python-runner
+      - cpp-runner
+      - java-runner
+      - javascript-runner
+    ports:
+      - "8080:8080"
+    volumes:      
+      - /var/run/docker.sock:/var/run/docker.sock
+    env_file:
+      - .env
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/spif
+      - SPRING_RABBITMQ_HOST=rabbitmq
+
+  # --- Frontend (React + TS + Node 23) ---
+  frontend:
+    build:
+      context: ./frontend # Aponta para a subpasta do React
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    container_name: frontend-app
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app         # Mapeia seu código para Hot Reload
+      - /app/node_modules       # Preserva os módulos internos do container
+    stdin_open: true            # Permite interação com o terminal do Node
+    tty: true
+    depends_on:
+      - app                     # Garante que a API sobe antes ou junto
+
+volumes:
+  pgdata:

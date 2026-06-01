@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
+        .container { background-color: #ffffff; padding: 30px; border-radius: 8px; max-width: 600px; margin: auto; }
+        .btn { display: inline-block; padding: 10px 20px; color: #ffffff; background-color: #28a745; text-decoration: none; border-radius: 5px; font-weight: bold; }
+        .footer { margin-top: 20px; font-size: 12px; color: #777; text-align: center; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 th:text="'Olá, ' + ${nomeAluno} + '!'">Olá, Aluno!</h2>
+
+    <p>Você acabou de receber um convite para uma nova disciplina!</p>
+
+    <p><strong>Disciplina:</strong> <span th:text="${nomeDisciplina}">Nome da Disciplina</span><strong> Ano:</strong> <span th:text="${anoDisciplina}">Ano da Disciplina</span></p>
+
+    <p style="text-align: center; margin-top: 30px;">
+        <a th:href="${linkAcesso}" class="btn">Acessar Convite Agora</a>
+    </p>
+
+    <div class="footer">
+        <p>SPIF - Sistema de Aprendizado em Programação do Instituto Federal De São Carlos</p>
+    </div>
+</div>
+</body>
+</html>

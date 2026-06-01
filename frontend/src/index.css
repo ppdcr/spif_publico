@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  --color-spif-bg: var(--spif-bg);
+  --color-spif-card: var(--spif-card);
+  --color-spif-card-border: var(--spif-border);
+  --color-spif-primary: var(--spif-primary);
+  --color-spif-primary-hover: var(--spif-primary-hover);
+  --color-spif-secondary: var(--spif-secondary);
+  --color-spif-text: var(--spif-text);
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Fira Code', ui-monospace, SFMono-Regular, monospace;
+}
+
+:root {
+  --spif-bg: #f8fafc;
+  --spif-card: #ffffff;
+  --spif-border: #e2e8f0;
+  --spif-primary: #10b981;
+  --spif-primary-hover: #059669;
+  --spif-secondary: #64748b;
+  --spif-text: #0f172a;
+}
+
+.dark {
+  --spif-bg: #0a0c10;
+  --spif-card: #11141a;
+  --spif-border: #1e232d;
+  --spif-primary: #10b981;
+  --spif-primary-hover: #059669;
+  --spif-secondary: #a1a1aa;
+  --spif-text: #f4f4f5;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-spif-bg);
+    color: var(--color-spif-text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-spif-primary) 30%, transparent);
+  }
+}
+
+@layer utilities {
+  .glass {
+    background-color: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .glass-card {
+    background-color: var(--color-spif-card);
+    border: 1px solid var(--color-spif-card-border);
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+}

@@ -1,0 +1,20 @@
+package com.spif.app.usuario.infrastructure.persistence.entity;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Entity
+@DiscriminatorValue("ROLE_ALUNO")
+@Getter
+@Setter
+@NoArgsConstructor
+public class AlunoEntity extends UsuarioEntity {
+
+    @Column(name = "pontos", nullable = false)
+    private int pontos;
+
+}

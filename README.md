@@ -6,14 +6,6 @@ O SPIF é uma plataforma web voltada à preparação de estudantes para competi�
 
 A plataforma oferece funcionalidades de cadastro e autenticação de usuários, gestão de problemas com casos de teste, criação de listas, disciplinas, turmas, percursos e competições, submissões com registro de desempenho, sistema de mensagens e um tutor de IA configurado para orientar o estudante sem fornecer soluções prontas.
 
-## Tecnologias utilizadas
-
-- **Frontend:** React + TypeScript (Vite)
-- **Backend:** Spring Boot (Java)
-- **Banco de dados:** PostgreSQL
-- **Mensageria:** RabbitMQ
-- **Conteinerização:** Docker + Docker Compose
-
 ## Pré-requisitos
 
 Antes de começar, certifique-se de ter instalado:
